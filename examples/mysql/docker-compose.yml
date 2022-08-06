@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+  crud_node_mysql:
+    image: mysql:8
+    container_name: crud_node_mysql
+    restart: on-failure
+    tty: true
+    stdin_open: true
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_MAX_ALLOWED_PACKET: 2018M
+      MYSQL_COLLATION: utf8mb4_0900_ai_ci
+      MYSQL_CHARSET: utf8mb4
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_0900_ai_ci
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - crud_node_mysql_data:/var/lib/mysql:rw
+      - ./database/db.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: '/usr/bin/mysql --user=root --password=root --execute "SHOW DATABASES;"'
+      interval: 15s
+      timeout: 5s
+      retries: 6
+    networks:
+      - crud_node
+
+volumes:
+  crud_node_mysql_data:
+    name: crud_node_mysql_data
+    driver: local
+
+networks:
+  crud_node:
+    name: crud_node
+    driver: bridge

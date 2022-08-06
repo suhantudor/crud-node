@@ -1,0 +1,95 @@
+{
+  "name": "crud-node",
+  "version": "1.0.0",
+  "description": "Agnostic client for crud operations to multiple databases",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "scripts": {
+    "watch": "tsc --watch",
+    "clean": "shx rm -rf dist",
+    "reinstall": "rm -rf node_modules && yarn install",
+    "build": "npm run clean && tsc -b",
+    "lint": "tsc --noEmit && eslint ./lib/**/*.{js,ts} --quiet --fix",
+    "lint:fix": "yarn eslint ./lib/**/*.{js,ts} --fix",
+    "lint:report": "yarn eslint ./lib/**/*.{js,ts} -f json -o eslint-report.json",
+    "format": "prettier --write \"**/*.+(ts|js|json|md)\"",
+    "prepublish": "npm run lint && npm run build",
+    "publish:local": "yarn link",
+    "publish:npm": "npm publish",
+    "bump:patch": "npm version patch",
+    "bump:minor": "npm version minor",
+    "bump:major": "npm version major"
+  },
+  "dependencies": {
+    "@mysql/xdevapi": "8.0.28",
+    "knex": "2.1.0",
+    "mongodb": "^4.7.0",
+    "mysql2": "^2.3.3",
+    "nanoid": "^3.1.31",
+    "oracledb": "^5.4.0",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "@babel/node": "^7.12.10",
+    "@babel/runtime": "^7.10.5",
+    "@types/node": "^14.14.41",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "7.28.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^4.3.7",
+    "prettier": "^2.5.1",
+    "shx": "^0.3.3",
+    "typescript": "^4.5.5"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "trailingComma": "all",
+    "singleQuote": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suhantudor/crud-node.git"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.18.1"
+  },
+  "keywords": [
+    "db",
+    "sql",
+    "nosql",
+    "mysql",
+    "percona",
+    "mysql x protocol",
+    "oracle",
+    "mongodb",
+    "pg",
+    "cassandra"
+  ],
+  "author": "Selsof",
+  "license": "MIT",
+  "homepage": "https://selsof.gitbook.io/crud-node/",
+  "bugs": {
+    "url": "https://github.com/suhantudor/crud-node/issues"
+  }
+}
