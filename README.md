@@ -54,7 +54,7 @@ yarn add crud-node
 - `[PREMIUM]` _**`getCount()`**_
 - `[PREMIUM]` _**`callStoredProcedure()`**_
 
-**NOTE:** `💲 [PREMIUM]` methods are available on _paid_ package. You can buy it from here and use it on your private project. [crud-node](https://selsof.com/)
+**NOTE:** `💲 [PREMIUM]` methods are available on _paid_ package. You can buy it from here and use it on your private project. [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
 
 ## 💨 Examples
 
