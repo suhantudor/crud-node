@@ -210,15 +210,6 @@ const sort = SortBy().asc(OfficeProps.places).toCriteria();
 const data = await officeController.getDocuments(session, pagination, sort);
 ```
 
-#### Retrieve all records
-
-```typescript
-// employeeRouter.{ts|js}
-import { employeeController } from './employeeController';
-
-const data = await employeeController.fetchAll(session);
-```
-
 #### Exists record
 
 ```typescript
@@ -228,6 +219,15 @@ import { employeeController } from './employeeController';
 const employeeId = '<_id>';
 
 const data = await employeeController.existsDocument(session, { employeeId });
+```
+
+#### Retrieve total records
+
+```typescript
+// employeeRouter.{ts|js}
+import { employeeController } from './employeeController';
+
+const data = await employeeController.getTotal(session);
 ```
 
 ## 👽 Supported databases
