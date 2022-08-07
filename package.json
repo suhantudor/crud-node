@@ -83,9 +83,9 @@
     "pg",
     "cassandra"
   ],
-  "author": "Selsof",
-  "license": "MIT",
-  "homepage": "https://selsof.gitbook.io/crud-node/",
+  "author": "Suhan Tudor",
+  "license": "UNLICENSED",
+  "homepage": "https://suhantudor.gitbook.io/crud-node/",
   "bugs": {
     "url": "https://github.com/suhantudor/crud-node/issues"
   }
