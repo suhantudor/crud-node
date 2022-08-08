@@ -1,21 +1,21 @@
-# crud-node
+# crud-node-client
 
 <img src="https://img.shields.io/badge/crud node-1.0.0-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
-**crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
+**crud-node-client** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
 
 ## ⚡️ Installation
 
-Install crud-node package running the following command:
+Install crud-node-client package running the following command:
 
 ```
-npm install crud-node
+npm install crud-node-client
 ```
 
 OR
 
 ```
-yarn add crud-node
+yarn add crud-node-client
 ```
 
 ## 👀 Features
@@ -54,7 +54,7 @@ yarn add crud-node
 - `[PREMIUM]` _**`getCount()`**_
 - `[PREMIUM]` _**`callStoredProcedure()`**_
 
-**NOTE:** `💲 [PREMIUM]` methods are available on _paid_ package. You can buy it from here and use it on your private project. [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
+**NOTE:** `💲 [PREMIUM]` methods are available on _paid_ package. You can buy it from here and use it on your private project. [crud-node-client](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
 
 ## 💨 Examples
 
@@ -66,7 +66,7 @@ A connection with a MySQL server can be established by creating an instance of M
 
 ```js
 // config.{ts|js}
-import { MySQLX } from 'crud-node';
+import { MySQLX } from 'crud-node-client';
 
 // Connection configuration object
 export const connection = {
@@ -111,7 +111,7 @@ For a clean architecture, you can create a controller responsible for accessing 
 
 ```typescript
 // employeeRouter.{ts|js}
-import { MySQLX } from 'crud-node';
+import { MySQLX } from 'crud-node-client';
 import { employeeSchema } from './schemas/employee';
 
 ...
@@ -126,7 +126,7 @@ Use the power of JavaScript inheritance and extend CRUD Controller with custom l
 
 ```typescript
 // employeeController.{ts|js}
-import { MySQLX, CRUDMySQLX, IAppWithDatabase } from 'crud-node';
+import { MySQLX, CRUDMySQLX, IAppWithDatabase } from 'crud-node-client';
 import { employeeSchema, EmployeeProps } from './schemas/employee';
 
 export class EmployeeController extends CRUDMySQLX<EmployeeProps> {
@@ -200,7 +200,7 @@ const data = await employeeController.getDocument(session, employeeId);
 
 ```typescript
 // officeRouter.{ts|js}
-import { SortBy, OffsetPagination } from 'crud-node';
+import { SortBy, OffsetPagination } from 'crud-node-client';
 import { officeController } from './officeController';
 import { OfficeProps } from './schemas/office';
 
