@@ -1,5 +1,5 @@
 {
-  "name": "crud-node-client",
+  "name": "crud-node",
   "version": "1.0.1",
   "description": "Agnostic client for crud operations to multiple databases",
   "main": "dist/index.js",
