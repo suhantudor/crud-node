@@ -1,6 +1,6 @@
 # crud-node
 
-<img src="https://img.shields.io/badge/crud node-1.0.0-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
+<img src="https://img.shields.io/badge/crud node-1.1.2-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
 **crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
 
