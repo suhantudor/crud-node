@@ -21,9 +21,9 @@ yarn add crud-node
 ## 👀 Features
 
 - CRUD
-- Filtering
+- Filtering _**[Premium]**_
 - Sorting
-- Grouping
+- Grouping _**[Premium]**_
 - Pagination
 
 > All examples are applicable for any database that we support.
@@ -62,7 +62,7 @@ yarn add crud-node
 
 #### Connection config example for MySQL Document Store
 
-A connection with a MySQL server can be established by creating an instance of MySQLX. The connection will be established via call connect.
+A connection with a MySQL server can be established by creating an instance of MySQLX. The connection will be established via call connect. Check also `examples` directory.
 
 ```js
 // config.{ts|js}
@@ -91,6 +91,45 @@ export const settings = {
 
 export const db = new MySQLX(connection, { pooling }, settings);
 await db.connect();
+```
+
+#### Define schema
+
+You have to define a schema like in the example bellow for you data that you want to insert in the database.
+
+```typescript
+// employeeSchema.{ts|js}
+import { IDocumentSchema, IDocument, getDocument, generateId } from 'crud-node';
+
+export enum EmployeeProps {
+  _id = '_id',
+  createdAt = 'createdAt',
+  email = 'email',
+  lastName = 'lastName',
+  firstName = 'firstName',
+  responsibilities = 'responsibilities',
+  officeId = 'officeId',
+  fired = 'fired',
+}
+
+export const employeeSchema: IDocumentSchema<EmployeeProps> = {
+  name: 'employee',
+  alias: 'emp',
+  generatedId: false,
+  unique: [[EmployeeProps.email]],
+  getDocument: (data: Partial<IDocument<EmployeeProps>>): IDocument<EmployeeProps> => {
+    const createdAt = Date.now().toString();
+    const defaults: Partial<IDocument<EmployeeProps>> = {
+      _id: generateId(employeeSchema.alias),
+      createdAt,
+    };
+    return getDocument(EmployeeProps, data, defaults);
+  },
+  toString: (data: IDocument<EmployeeProps>) => {
+    return `${data.firstName} ${data.lastName}`;
+  },
+};
+
 ```
 
 #### Create schema on the fly
