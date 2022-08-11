@@ -1,4 +1,4 @@
-import { Condition, CRUDMySQLX, Filter, MySQLX, OffsetPagination, SortBy } from 'crud-node';
+import { CRUDMySQLX, MySQLX, OffsetPagination, SortBy } from 'crud-node';
 
 import { employeeSchema } from './schemas/employee';
 import { OfficeProps, officeSchema } from './schemas/office';
@@ -39,12 +39,8 @@ const example = async () => {
   }, true);
 
   await db.usingSession(async (session) => {
-    await officeController.deleteAll(session);
-    await employeeController.deleteAll(session);
-  }, true);
-
-  await db.usingSession(async (session) => {
     await officeController.createDocument(session, {
+      _id: 'virtual-offices-of-new-york-city',
       officeCode: 'Virtual Offices of New York City',
       address: {
         country: 'United States',
@@ -59,6 +55,7 @@ const example = async () => {
     });
 
     await officeController.createDocument(session, {
+      _id: 'nyc-office-suites',
       officeCode: 'NYC Office Suites',
       address: {
         country: 'United States',
@@ -73,6 +70,7 @@ const example = async () => {
     });
 
     await officeController.createDocument(session, {
+      _id: 'workville',
       officeCode: 'WORKVILLE',
       address: {
         country: 'United States',
@@ -87,6 +85,7 @@ const example = async () => {
     });
 
     await officeController.createDocument(session, {
+      _id: 'grand-central-offices',
       officeCode: 'Grand Central Offices',
       address: {
         country: 'United States',
@@ -101,6 +100,7 @@ const example = async () => {
     });
 
     await officeController.createDocument(session, {
+      _id: 'crystal-workspaces',
       officeCode: 'Crystal Workspaces',
       address: {
         country: 'United States',
@@ -113,55 +113,26 @@ const example = async () => {
       places: 25,
     });
 
+    const pagination = OffsetPagination(1, 10);
+
     const sortOfficesByDateOfCreation = SortBy().desc(OfficeProps.places).toCriteria();
 
-    const allOffices = await officeController.fetchAll(session, sortOfficesByDateOfCreation);
+    const allOffices = await officeController.getDocuments(session, pagination, sortOfficesByDateOfCreation);
 
     console.log('All registered offices:', JSON.stringify(allOffices, null, 3));
+
+    const office = await officeController.getDocument(session, allOffices.data[0]._id);
+
+    console.log('Office with the biggest amount of free spaces:', JSON.stringify(office, null, 3));
   }, true);
 
   await db.usingSession(async (session) => {
-    const filterOfficesInNYC = Filter.toCriteria(
-      Filter.and(Condition.like('address.city', '%New York%'), Condition.gre(OfficeProps.places, 1)),
-    );
-
-    const sortOfficesByAvailablePlaces = SortBy().asc(OfficeProps.places).toCriteria();
-
-    const pagination = OffsetPagination(1, 10);
-
-    const officesInNYC = await officeController.filterDocumentsByCriteria(
-      session,
-      filterOfficesInNYC,
-      pagination,
-      sortOfficesByAvailablePlaces,
-    );
-
-    console.log('All offices in NY with available working places', JSON.stringify(officesInNYC, null, 3));
-
-    const coworkingSpaces = await officeController.searchDocuments(
-      session,
-      {
-        name: '%coworking%',
-        officeCode: '%coworking%',
-      },
-      'OR',
-    );
-
-    console.log('All coworking spaces:', JSON.stringify(coworkingSpaces, null, 3));
-
-    const flexibleWorkspaces = await officeController.searchDocumentsByCriteria(
-      session,
-      `${officeController.getSearchCriteria(OfficeProps.name, 'keyword1')}
-        OR ${officeController.getSearchCriteria(OfficeProps.name, 'keyword2')}
-        OR ${officeController.getSearchCriteria(OfficeProps.name, 'keyword3')}`,
-      {
-        keyword1: '%coworking%',
-        keyword2: '%flexible workspace%',
-        keyword3: '%serviced office space%',
-      },
-    );
-
-    console.log('All flexible spaces', JSON.stringify(flexibleWorkspaces, null, 3));
+    try {
+      await officeController.existsDocument(session, { [OfficeProps.officeCode]: 'WORKVILLE' });
+      console.log('WORKVILLE was not registered');
+    } catch (err) {
+      console.log(err);
+    }
   });
 
   await db.usingSession(async (session) => {
@@ -171,7 +142,7 @@ const example = async () => {
       lastName: 'Brett',
     });
 
-    const office = await officeController.findDocument(session, { officeCode: 'WORKVILLE' });
+    const office = await officeController.getDocument(session, 'workville');
 
     if (office) {
       await employeeController.updateDocument(session, leslieBrett._id, {
@@ -212,26 +183,36 @@ const example = async () => {
 
     await employeeController.updateDocument(session, joeSchmoe._id, { fired: true });
 
-    const allEmployees = await employeeController.fetchAll(session);
+    const allEmployees = await employeeController.getDocuments(session);
 
     console.log('All employees:', JSON.stringify(allEmployees, null, 3));
   }, true);
 
   await db.usingSession(async (session) => {
-    const firedEmployees = await employeeController.filterDocuments(session, {
-      fired: true,
-    });
+    const totalEmployees = await employeeController.getTotal(session);
+
+    const employees = await employeeController.getDocuments(session, OffsetPagination(1, totalEmployees));
 
     const deletedEmployeesRecords = await Promise.all(
-      firedEmployees.data.map(async (firedEmployee) => employeeController.deleteDocument(session, firedEmployee._id)),
+      employees.data.map(async (employee) => employeeController.deleteDocument(session, employee._id)),
     );
 
-    console.log('Deleted records of fired employees:', JSON.stringify(deletedEmployeesRecords, null, 3));
-  }, true);
+    console.log(
+      'Deleted records of employees:',
+      JSON.stringify(deletedEmployeesRecords, null, 3),
+      'from:',
+      totalEmployees,
+    );
 
-  await db.usingSession(async (session) => {
-    await officeController.deleteAll(session);
-    await employeeController.deleteAll(session);
+    const totalOffices = await officeController.getTotal(session);
+
+    const offices = await officeController.getDocuments(session, OffsetPagination(1, totalOffices));
+
+    const deletedOfficesRecords = await Promise.all(
+      offices.data.map(async (office) => officeController.deleteDocument(session, office._id)),
+    );
+
+    console.log('Deleted records of offices:', JSON.stringify(deletedOfficesRecords, null, 3), 'from:', totalOffices);
   }, true);
 };
 
