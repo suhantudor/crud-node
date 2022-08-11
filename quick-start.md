@@ -5,11 +5,10 @@
 {% endhint %}
 
 {% hint style="info" %}
-Please, check `examples` directory as well.
-{% endhint %}
+Please, check `examples`&#x20;
 
-{% hint style="info" %}
-Check real-world example here [https://github.com/suhantudor/crud-node-realworld-example](https://github.com/suhantudor/crud-node-realworld-example)
+* [https://github.com/suhantudor/crud-node/tree/main/examples](https://github.com/suhantudor/crud-node/tree/main/examples).
+* [https://github.com/suhantudor/crud-node-realworld-example](https://github.com/suhantudor/crud-node-realworld-example)
 {% endhint %}
 
 This example very briefly illustrates the 3 methods available in Crud Node.
