@@ -23,40 +23,24 @@ yarn add crud-node
 ## 👀 Features
 
 - CRUD
-- Filtering _**[Premium]**_
 - Sorting
-- Grouping _**[Premium]**_
 - Pagination
 
 > All examples are applicable for any database that we support.
 
 ## 📃 Available methods
 
-- `[FREE]` `init()`
-- `[FREE]` `toString()`
-- `[FREE]` `createDocument()`
-- `[FREE]` `updateDocument()`
-- `[FREE]` `deleteDocument()`
-- `[FREE]` `getDocument()`
-- `[FREE]` `getDocuments()`
-- `[FREE]` `existsDocument()`
-- `[FREE]` `getTotal()`
-- `[PREMIUM]` _**`createDocumentIfNotExists()`**_
-- `[PREMIUM]` _**`deleteAll()`**_
-- `[PREMIUM]` _**`getDocumentByCriteria()`**_
-- `[PREMIUM]` _**`getSearchCriteria()`**_
-- `[PREMIUM]` _**`searchDocumentsByCriteria()`**_
-- `[PREMIUM]` _**`searchDocuments()`**_
-- `[PREMIUM]` _**`groupByDocuments()`**_
-- `[PREMIUM]` _**`filterDocumentsByCriteria()`**_
-- `[PREMIUM]` _**`filterDocuments()`**_
-- `[PREMIUM]` _**`filterDocumentsByIds()`**_
-- `[PREMIUM]` _**`findDocument()`**_
-- `[PREMIUM]` _**`fetchAll()`**_
-- `[PREMIUM]` _**`getCount()`**_
-- `[PREMIUM]` _**`callStoredProcedure()`**_
+- `init()`
+- `toString()`
+- `createDocument()`
+- `updateDocument()`
+- `deleteDocument()`
+- `getDocument()`
+- `getDocuments()`
+- `existsDocument()`
+- `getTotal()`
 
-**NOTE:** `💲 [PREMIUM]` methods are available on _paid_ package. You can buy it from here and use it on your private project. [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
+**NOTE:** `💲 You can buy _premium_ version and use it on your private project from here: [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
 
 ## 💨 Examples
 
