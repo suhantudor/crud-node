@@ -19,6 +19,7 @@
 
 ## Reference
 
+* [🧰 API Schema](reference/api-schema.md)
 * [⭐ API Reference](reference/api-reference/README.md)
   * [init](reference/api-reference/init.md)
   * [toString](reference/api-reference/tostring.md)
@@ -29,7 +30,6 @@
   * [getDocuments](reference/api-reference/getdocuments.md)
   * [existsDocument](reference/api-reference/existsdocument.md)
   * [getTotal](reference/api-reference/fetchall.md)
-* [🍩 API Schema](reference/api-schema.md)
 
 ***
 
