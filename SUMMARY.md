@@ -29,7 +29,7 @@
   * [getDocuments](reference/api-reference/getdocuments.md)
   * [existsDocument](reference/api-reference/existsdocument.md)
   * [getTotal](reference/api-reference/fetchall.md)
-* [🍩 Schema](reference/schema.md)
+* [🍩 API Schema](reference/api-schema.md)
 
 ***
 

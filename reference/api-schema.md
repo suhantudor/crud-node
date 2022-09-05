@@ -2,5 +2,5 @@
 description: https://json-schema.org/
 ---
 
-# 🍩 Schema
+# 🍩 API Schema
 

@@ -14,6 +14,8 @@ To override toString formatting, add to document schema toString method.
 
 **Signature**
 
+The same on all adapters
+
 ```javascript
 toString(document?: IDocument<S>): string;
 ```
