@@ -1,7 +1,7 @@
 ---
 description: >-
   crud-node is an agnostic database client for Nodejs that allows you to perform
-  CRUD operations to a database or multiple databases.
+  CRUD operations to a database in a simple way.
 ---
 
 # ⚡ Overview
