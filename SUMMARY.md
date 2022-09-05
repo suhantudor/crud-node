@@ -19,7 +19,7 @@
 
 ## Reference
 
-* [🧰 API Schema](reference/api-schema.md)
+* [🧰 API Schema (soon)](reference/api-schema-soon.md)
 * [⭐ API Reference](reference/api-reference/README.md)
   * [init](reference/api-reference/init.md)
   * [toString](reference/api-reference/tostring.md)
