@@ -5,6 +5,10 @@ description: This is an adapter for MySQL databases.
 # MySQL
 
 {% hint style="info" %}
+For **MySQL** adapter we user _knex_ under the hood.
+{% endhint %}
+
+{% hint style="info" %}
 **Good to know:** Before running the example make sure you have installed minimum Nodejs 14, npm 6, and have created a simple express application.
 {% endhint %}
 

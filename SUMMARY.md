@@ -2,6 +2,7 @@
 
 * [⚡ Overview](README.md)
 * [✨ Installation](installation.md)
+* [🧰 Schema (soon)](schema-soon.md)
 * [☄ Quick Start](quick-start.md)
 
 ## Guides
@@ -19,7 +20,6 @@
 
 ## Reference
 
-* [🧰 API Schema (soon)](reference/api-schema-soon.md)
 * [⭐ API Reference](reference/api-reference/README.md)
   * [init](reference/api-reference/init.md)
   * [toString](reference/api-reference/tostring.md)
