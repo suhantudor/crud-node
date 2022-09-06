@@ -1,5 +1,5 @@
 ---
-description: Retrieve documents filtered/sorted by statement.
+description: Count documents filtered by criteria.
 ---
 
 # getCount

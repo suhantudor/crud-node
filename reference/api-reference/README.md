@@ -70,6 +70,6 @@ Everything related to `existsDocument`:
 
 Everything related to `getTotal`:
 
-{% content-ref url="gettotal.md" %}
-[gettotal.md](gettotal.md)
+{% content-ref url="fetchall.md" %}
+[fetchall.md](fetchall.md)
 {% endcontent-ref %}

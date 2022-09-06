@@ -30,7 +30,7 @@
   * [getDocuments](reference/api-reference/getdocuments.md)
   * [existsDocument](reference/api-reference/existsdocument.md)
   * [getCount](reference/api-reference/getcount.md)
-  * [getTotal](reference/api-reference/gettotal.md)
+  * [getTotal](reference/api-reference/fetchall.md)
 
 ***
 
