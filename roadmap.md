@@ -10,7 +10,7 @@ If the library proves to have a practical utility we plan to add new adapters fo
 
 1. Mongo, _October 2022_
 2. Postgress, _November 2022_
-3. Casandra, _December 2022_
-4. Oracle, _February 2023_
-5. SqlLite, _March 2023_
-6. Couchdb, _April 2023_
+3. Oracle, _December 2022_
+4. Casandra, _January 2023_
+5. SqlLite, _February 2023_
+6. Couchdb, _March 2023_
