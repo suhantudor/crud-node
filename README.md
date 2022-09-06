@@ -1,10 +1,11 @@
 # crud-node
 
-<img src="https://img.shields.io/badge/crud node-1.1.4-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
+<img src="https://img.shields.io/badge/crud node-1.1.7-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
 **crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
 
-Check real world example [here](https://github.com/suhantudor/crud-node-realworld-example)
+- [example](https://github.com/suhantudor/crud-node-realworld-example)
+- [documentation](https://suhantudor.gitbook.io/crud-node/)
 
 ## ⚡️ Installation
 
@@ -26,8 +27,6 @@ yarn add crud-node
 - Sorting
 - Pagination
 
-> All examples are applicable for any database that we support.
-
 ## 📃 Available methods
 
 - `init()`
@@ -38,9 +37,14 @@ yarn add crud-node
 - `getDocument()`
 - `getDocuments()`
 - `existsDocument()`
+- `getCount()` 🆕
 - `getTotal()`
 
 **NOTE:** `💲 You can buy _premium_ version and use it on your private project from here: [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
+
+## ❗ Schemas
+
+To ensure consistency of implementation across multiple databases we use [json schema](https://json-schema.org/) to valiate data types.
 
 ## 💨 Examples
 
@@ -275,6 +279,19 @@ const employeeId = '<_id>';
 const data = await employeeController.existsDocument(session, { employeeId });
 ```
 
+#### Count records by filter
+
+```typescript
+// employeeRouter.{ts|js}
+import { EmployeeProps } from './schemas/employee';
+
+const officeId = '<_id>';
+
+const employeesByOffice = await this.employeeController.getCount(session, {
+  [EmployeeProps.officeId]: officeId,
+});
+```
+
 #### Retrieve total records
 
 ```typescript
@@ -293,12 +310,12 @@ const data = await employeeController.getTotal(session);
 
 ## 🔜 Roadmap
 
-- PostgreSQL _**`October 2022`**_
-- MongoDB _**`November 2022`**_
-- OracleDB _**`December 2022`**_
-- Cassandra _**`January 2023`**_
-- SQLite _**`February 2023`**_
-- CouchDB _**`March 2023`**_
+- MongoDB _**`October 2022`**_
+- PostgreSQL _**`November 2022`**_
+- Cassandra _**`December 2023`**_
+- OracleDB _**`February 2022`**_
+- SQLite _**`March 2023`**_
+- CouchDB _**`April 2023`**_
 
 ## 📝 Notes
 
@@ -306,4 +323,4 @@ No notes!
 
 ## ⚠️ License
 
-UNLICENSED
+MIT

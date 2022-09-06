@@ -190,6 +190,25 @@ export class CRUDMySQLX<S extends string> {
     }
   }
 
+  /**
+   * Get documents count fit to filter. Case Sensitive.
+   *
+   * Throws `errorNoCriteriaProvided` if props are empty.
+   * @param {Object} session Current session with opened connection
+   * @param {Object} props The collection of bindings for the filter statement.
+   * @param {String} join compare operation. Default 'AND'
+   */
+  async getCount(session: MySQLXSession, props: Partial<IDocument<S>>, join: 'OR' | 'AND' = 'AND'): Promise<number> {
+    if (!props) {
+      throw new DbError(dbErrors.errorNoCriteriaProvided());
+    }
+    const statement = this.getWhereRawStatement(props, join);
+    const collection = await this.db.getCollection(session, this.schema);
+    const cursorAll = await collection.find(statement).bind(props).execute();
+    const total = cursorAll.toArray().length;
+    return total;
+  }
+
   async getTotal(session: MySQLXSession): Promise<number> {
     const collection = await this.db.getCollection(session, this.schema);
     const cursorAll = await collection.find().execute();

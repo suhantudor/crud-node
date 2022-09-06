@@ -210,16 +210,33 @@ export class CRUDMySQL<S extends string> {
     const bindings = this.getBindings(props);
     const criteria = this.getWhereRawStatement(props, 'AND');
 
-    const { count } = await collection
-      .whereExists(function () {
-        collection.select(1).whereRaw(criteria, bindings);
-      })
-      .first()
-      .count(this.id, { as: 'count' });
+    const { count } = await collection.whereRaw(criteria, bindings).first().count(this.id, { as: 'count' });
 
     if (count > 0) {
       throw new DbError(dbErrors.errorDuplicatedDocument());
     }
+  }
+
+  /**
+   * Get documents count fit to filter. Case Sensitive.
+   *
+   * Throws `errorNoCriteriaProvided` if props are empty.
+   * @param {Object} session Current session with opened connection
+   * @param {Object} props The collection of bindings for the filter statement.
+   * @param {String} join compare operation. Default 'AND'
+   */
+  async getCount(session: MySQLSession, props: Partial<IDocument<S>>, join: 'OR' | 'AND' = 'AND'): Promise<number> {
+    if (!props) {
+      throw new DbError(dbErrors.errorNoCriteriaProvided());
+    }
+    const statement = this.getWhereRawStatement(props, join);
+    const bindings = this.getBindings(props);
+    const { total } = await this.db
+      .getCollection(session, this.schema)
+      .whereRaw(statement, bindings)
+      .first()
+      .count(this.id, { as: 'total' });
+    return total;
   }
 
   async getTotal(session: MySQLSession): Promise<number> {
