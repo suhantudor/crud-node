@@ -15,7 +15,7 @@
   * [MySQLX](adapters/adapters/mysqlx.md)
   * [Mongo (soon)](adapters/adapters/mongo-soon.md)
   * [Postgres (soon)](adapters/adapters/postgres-soon.md)
-  * [Oracle (soon)](adapters/adapters/oracle-soon.md)
+  * [Cassandra (soon)](adapters/adapters/oracle-soon.md)
 
 ## Reference
 
@@ -29,7 +29,8 @@
   * [getDocument](reference/api-reference/getdocument.md)
   * [getDocuments](reference/api-reference/getdocuments.md)
   * [existsDocument](reference/api-reference/existsdocument.md)
-  * [getTotal](reference/api-reference/fetchall.md)
+  * [getCount](reference/api-reference/getcount.md)
+  * [getTotal](reference/api-reference/gettotal.md)
 
 ***
 

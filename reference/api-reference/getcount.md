@@ -1,28 +1,22 @@
 ---
-description: Retrieve documents from a collection without filtering.
+description: Retrieve documents filtered/sorted by statement.
 ---
 
-# getDocuments
-
-{% hint style="info" %}
-Applies pagination to the result set or uses `DEFAULT_PAGE_SIZE` to limit the result set.
-{% endhint %}
+# getCount
 
 **Signature**
 
 {% tabs %}
 {% tab title="MySQL" %}
 ```javascript
-getDocuments(session: Knex, pagination?: IOffsetPagination, sort?: Sort): Promise<IPaginatedSet<IDocument<S>>>;
+getCount(session: MySQLSession, props: Partial<IDocument<S>>, join?: 'OR' | 'AND'): Promise<number>;
 ```
 {% endtab %}
 
 {% tab title="MySQLX" %}
 ```javascript
-getDocuments(session: mysqlx.Session, pagination?: IOffsetPagination, sort?: Sort): Promise<IPaginatedSet<IDocument<S>>>;
+getCount(session: MySQLXSession, props: Partial<IDocument<S>>, join?: 'OR' | 'AND'): Promise<number>;
 ```
-
-
 {% endtab %}
 {% endtabs %}
 
@@ -40,10 +34,11 @@ const transacted = false;
 const employeeController = new CRUDMySQL(db, employeeSchema);
 
 await db.usingSession(async (session) => {
-  const pagination = OffsetPagination(1, 10);
-  const sort = SortBy().asc(EmployeeProps.lastName).toCriteria();
+  const officeId = '<_id>';
 
-  const data = await employeeController.getDocuments(session, pagination, sort);
+  const data = await this.employeeController.getCount(session, {
+    [EmployeeProps.officeId]: officeId,
+  });
   return data;
 }, transacted);
 ```
@@ -60,10 +55,11 @@ const transacted = false;
 const employeeController = new CRUDMySQLX(db, employeeSchema);
 
 await db.usingSession(async (session) => {
-  const pagination = OffsetPagination(1, 10);
-  const sort = SortBy().asc(EmployeeProps.lastName).toCriteria();
+  const officeId = '<_id>';
 
-  const data = await employeeController.getDocuments(session, pagination, sort);
+  const data = await this.employeeController.getCount(session, {
+    [EmployeeProps.officeId]: officeId,
+  });
   return data;
 }, transacted);
 ```

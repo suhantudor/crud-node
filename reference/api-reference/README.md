@@ -58,18 +58,18 @@ Everything related to `getDocuments`:
 [getdocuments.md](getdocuments.md)
 {% endcontent-ref %}
 
-## fetchAll
-
-Everything related to `fetchAll`:
-
-{% content-ref url="fetchall.md" %}
-[fetchall.md](fetchall.md)
-{% endcontent-ref %}
-
 ## existsDocument
 
 Everything related to `existsDocument`:
 
 {% content-ref url="existsdocument.md" %}
 [existsdocument.md](existsdocument.md)
+{% endcontent-ref %}
+
+## getTotal
+
+Everything related to `getTotal`:
+
+{% content-ref url="gettotal.md" %}
+[gettotal.md](gettotal.md)
 {% endcontent-ref %}
