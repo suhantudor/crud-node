@@ -25,3 +25,7 @@
 - Fix `existsDocument` method bug
 - Add `getCount` new method
 - Add short info about `schema`
+
+**Version 1.1.8**, _26 Oct 2022_
+
+- Update roadmap future releases

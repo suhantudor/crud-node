@@ -1,6 +1,6 @@
 # crud-node
 
-<img src="https://img.shields.io/badge/crud node-1.1.7-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
+<img src="https://img.shields.io/badge/crud node-1.1.8-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
 **crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
 
@@ -310,12 +310,12 @@ const data = await employeeController.getTotal(session);
 
 ## 🔜 Roadmap
 
-- MongoDB _**`October 2022`**_
-- PostgreSQL _**`November 2022`**_
-- Cassandra _**`December 2023`**_
-- OracleDB _**`February 2022`**_
-- SQLite _**`March 2023`**_
-- CouchDB _**`April 2023`**_
+- MongoDB _**`March 2023`**_
+- PostgreSQL _**`April 2023`**_
+- Cassandra _**`May 2023`**_
+- OracleDB _**`June 2023`**_
+- SQLite _**`July 2023`**_
+- CouchDB _**`August 2023`**_
 
 ## 📝 Notes
 
