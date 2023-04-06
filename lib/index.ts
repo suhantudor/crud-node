@@ -18,7 +18,21 @@ export { CRUDMySQL, CRUDMySQLX } from './controllers';
 export { IDbError, IDbErrorConfig, DbError, ErrorsMapper, dbErrors } from './errors';
 
 // Filter
-export { Sort, ORDER, SortBy, SortCondition, Sorting } from './filter';
+export {
+  Sort,
+  ORDER,
+  SortBy,
+  SortCondition,
+  Sorting,
+  AGG,
+  GroupCondition,
+  Group,
+  FilterGroup,
+  FilterCondition,
+  FILTER_LEVEL,
+  FILTER_OPERATIONS,
+  GROUP_OPERATION,
+} from './filter';
 
 // Middlewares
 export { withMySQL, withMySQLX } from './middlewares';

@@ -6,17 +6,17 @@
 -- Client version: 4.1
 --
 
--- 
+--
 -- Disable foreign keys
--- 
+--
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 
--- 
+--
 -- Set SQL mode
--- 
+--
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- 
+--
 -- Set character set the client will use to send SQL statements to the server
 --
 SET NAMES 'utf8';
@@ -74,12 +74,12 @@ ENGINE = INNODB,
 CHARACTER SET utf8mb4,
 COLLATE utf8mb4_0900_ai_ci;
 
--- 
+--
 -- Restore previous SQL mode
--- 
+--
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 
--- 
+--
 -- Enable foreign keys
--- 
+--
 /*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;

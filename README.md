@@ -1,11 +1,15 @@
 # crud-node
 
-<img src="https://img.shields.io/badge/crud node-1.1.8-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
+<img src="https://img.shields.io/badge/crud node-1.1.9-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
 **crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
 
 - [example](https://github.com/suhantudor/crud-node-realworld-example)
 - [documentation](https://suhantudor.gitbook.io/crud-node/)
+
+## 🤡 Goal
+
+The motivation behind the `crud-node` is to provide a uniform interface to perform CRUD operation for many databases such as MySQL, MySQLX, Mongo, Cassandra, etc.
 
 ## ⚡️ Installation
 
@@ -25,6 +29,8 @@ yarn add crud-node
 
 - CRUD
 - Sorting
+- Filtering
+- Grouping
 - Pagination
 
 ## 📃 Available methods
@@ -32,15 +38,25 @@ yarn add crud-node
 - `init()`
 - `toString()`
 - `createDocument()`
+- `createDocumentIfNotExists()` 🆕
 - `updateDocument()`
 - `deleteDocument()`
 - `getDocument()`
 - `getDocuments()`
+- `getDocumentByCriteria()` 🆕
+- `searchDocumentsByCriteria()` 🆕
+- `searchDocuments()` 🆕
+- `groupByDocuments()` 🆕
+- `filterDocumentsByCriteria()` 🆕
+- `filterDocuments()` 🆕
+- `filterDocumentsByIds()` 🆕
 - `existsDocument()`
+- `findDocument()` 🆕
+- `fetchAll()` 🆕
 - `getCount()` 🆕
 - `getTotal()`
-
-**NOTE:** `💲 You can buy _premium_ version and use it on your private project from here: [crud-node](https://selsof.com/products/crud-node-premium-jtqg_f99nox)
+- `deleteAll()`
+- `callStoredProcedure()` 🆕
 
 ## ❗ Schemas
 
@@ -48,7 +64,7 @@ To ensure consistency of implementation across multiple databases we use [json s
 
 ## 💨 Examples
 
-> In this examples we will use MySQLX controller to show how the package works and what benefits it brings.
+> In this examples we will use MySQLX controller to show how the package works and what benefits it brings. For MySQL check the examples directory.
 
 #### Connection config example for MySQL Document Store
 
@@ -216,6 +232,21 @@ await db.usingSession(async (session) => {
 }, transacted);
 ```
 
+#### Create record, if not exists
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { employeeController } from './employeeController';
+
+const payload = {
+  email: 'leslie46@24mailin.com',
+  firstName: 'Leslie',
+  lastName: 'Brett',
+};
+const data = await employeeController.createDocumentIfNotExists(session, payload);
+```
+
 #### Update record
 
 ```typescript
@@ -243,6 +274,17 @@ const employeeId = '<_id>';
 const data = await employeeController.deleteDocument(session, employeeId, payload);
 ```
 
+#### Delete all records
+
+```typescript
+// employeeRouter.{ts|js}
+! WARNING This deletes all rows from a table
+
+import { employeeController } from './employeeController';
+
+await employeeController.deleteAll(session);
+```
+
 #### Retrieve record
 
 ```typescript
@@ -266,6 +308,145 @@ const pagination = OffsetPagination(1, 10);
 const sort = SortBy().asc(OfficeProps.places).toCriteria();
 
 const data = await officeController.getDocuments(session, pagination, sort);
+```
+
+#### Retrieve record by criteria
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { employeeController } from './employeeController';
+import { EmployeeProps } from './schemas/employee';
+
+const officeId = '<_id>';
+
+const data = await employeeController.getDocumentByCriteria(session, { [EmployeeProps.officeId]: officeId });
+```
+
+#### Search records by criteria (Case-insensitive)
+
+```typescript
+// officeRouter.{ts|js}
+
+import { officeController } from './officeController';
+import { OfficeProps } from './schemas/office';
+
+const data = await officeController.searchDocumentsByCriteria(
+  session,
+  `${officeController.getSearchCriteria(OfficeProps.name, 'keyword1')}
+      OR ${officeController.getSearchCriteria(OfficeProps.name, 'keyword2')}
+      OR ${officeController.getSearchCriteria(OfficeProps.name, 'keyword3')}`,
+  {
+    keyword1: '%coworking%',
+    keyword2: '%flexible workspace%',
+    keyword3: '%serviced office space%',
+  },
+);
+```
+
+#### Search records (Case-insensitive)
+
+```typescript
+// officeRouter.{ts|js}
+
+import { officeController } from './officeController';
+
+const data = await officeController.searchDocuments(
+  session,
+  {
+    name: '%coworking%',
+    officeCode: '%coworking%',
+  },
+  'OR',
+);
+```
+
+#### Filter records by criteria
+
+```typescript
+// officeRouter.{ts|js}
+
+import { Condition, Filter, OffsetPagination, SortBy } from 'crud-node';
+import { officeController } from './officeController';
+import { OfficeProps } from './schemas/office';
+
+const filterOfficesInNYC = Filter.toCriteria(
+  Filter.and(Condition.like('address.city', '%New York%'), Condition.gre(OfficeProps.places, 1)),
+);
+const sortOfficesByAvailablePlaces = SortBy().asc(OfficeProps.places).toCriteria();
+const pagination = OffsetPagination(1, 10);
+
+const data = await officeController.filterDocumentsByCriteria(
+  session,
+  filterOfficesInNYC,
+  pagination,
+  sortOfficesByAvailablePlaces,
+);
+```
+
+#### Group records
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { GroupBy } from 'crud-node';
+import { employeeController } from './employeeController';
+import { EmployeeProps } from './schemas/employee';
+
+const data = await employeeController.groupByDocuments<'fired' | EmployeeProps.createdAt>(
+  session,
+  GroupBy<EmployeeProps, 'fired' | EmployeeProps.createdAt>()
+    .fields(EmployeeProps.createdAt)
+    .aggregate(EmployeeProps._id, 'fired', AGG.COUNT)
+    .toCriteria(),
+);
+```
+
+#### Filter records
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { OffsetPagination } from 'crud-node';
+import { employeeController } from './employeeController';
+
+const pagination = OffsetPagination(1, 10);
+
+const data = await employeeController.filterDocuments(session, { fired: true }, 'AND', pagination);
+```
+
+#### Filter records by ids
+
+```typescript
+// officeRouter.{ts|js}
+
+import { officeController } from './officeController';
+
+const officeIds = ['<id1>', '<id2>'];
+
+const data = await officeController.filterDocumentsByIds(session, officeIds);
+```
+
+#### Retrieve all records
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { employeeController } from './employeeController';
+
+const data = await employeeController.fetchAll(session);
+```
+
+#### Find record
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { employeeController } from './employeeController';
+
+const employeeId = '<_id>';
+
+const data = await employeeController.findDocument(session, { employeeId });
 ```
 
 #### Exists record
@@ -301,6 +482,28 @@ import { employeeController } from './employeeController';
 const data = await employeeController.getTotal(session);
 ```
 
+#### Call store procedure
+
+```typescript
+// employeeRouter.{ts|js}
+
+import { employeeController } from './employeeController';
+
+const data = await employeeController.callStoredProcedure(session, '<sp_name>', ['<parameter>']);
+```
+
+## 🔨 Issues
+
+If you identify any errors in this module, or have an idea for an improvement, please [open an issue](https://github.com/suhantudor/crud-node/issues). We're excited to see what the community thinks of this project, and we would love your input!
+
+## 📖 API Documentation
+
+In addition to the above getting-started guide, we have [API documentation](https://suhantudor.gitbook.io/crud-node/).
+
+## 👉🏻 Contributing
+
+We welcome contributions large and small.
+
 ## 👽 Supported databases
 
 - MySQL
@@ -310,16 +513,20 @@ const data = await employeeController.getTotal(session);
 
 ## 🔜 Roadmap
 
-- MongoDB _**`March 2023`**_
-- PostgreSQL _**`April 2023`**_
-- Cassandra _**`May 2023`**_
-- OracleDB _**`June 2023`**_
-- SQLite _**`July 2023`**_
-- CouchDB _**`August 2023`**_
+- MongoDB `October 2023`
+- PostgreSQL `October 2023`
+- Cassandra `November 2023`
+- OracleDB `November 2023`
+- SQLite `December 2023`
+- CouchDB `December 2023`
 
 ## 📝 Notes
 
 No notes!
+
+## 🔝 Used in production by
+
+[Delimia](https://delimia.com) - On-demand courier delivery service
 
 ## ⚠️ License
 

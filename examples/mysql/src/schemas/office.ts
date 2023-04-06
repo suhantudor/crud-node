@@ -1,4 +1,4 @@
-import { IDocumentSchema, IDocument, getDocument } from 'crud-node';
+import { IDocumentSchema, IDocument, getDocument, generateId } from 'crud-node';
 
 export enum OfficeProps {
   _id = '_id',
@@ -14,7 +14,9 @@ export const officeSchema: IDocumentSchema<OfficeProps> = {
   generatedId: false,
   unique: [[OfficeProps.officeCode]],
   getDocument: (data: Partial<IDocument<OfficeProps>>): IDocument<OfficeProps> => {
-    const defaults: Partial<IDocument<OfficeProps>> = {};
+    const defaults: Partial<IDocument<OfficeProps>> = {
+      _id: generateId(officeSchema.alias),
+    };
     return getDocument(OfficeProps, data, defaults);
   },
 };
