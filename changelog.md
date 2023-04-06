@@ -29,3 +29,24 @@ description: Changelog
 * Fix `existsDocument` method bug
 * Add `getCount` new method
 * Add short info about `schema`
+
+**Version 1.1.8**, _26 October 2022_
+
+* Format code
+
+**Version 1.1.9**, _6 April 2023_
+
+* Add new methods
+  * _`createDocumentIfNotExists() 🆕`_
+  * _`getDocumentByCriteria() 🆕`_
+  * _`searchDocumentsByCriteria() 🆕`_
+  * _`searchDocuments() 🆕`_
+  * _`groupByDocuments() 🆕`_
+  * _`filterDocumentsByCriteria() 🆕`_
+  * _`filterDocuments() 🆕`_
+  * _`filterDocumentsByIds() 🆕`_
+  * _`existsDocument()`_
+  * _`findDocument() 🆕`_
+  * _`fetchAll() 🆕`_
+  * _`deleteAll()`_
+  * _`callStoredProcedure() 🆕`_
