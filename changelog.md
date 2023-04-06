@@ -37,16 +37,15 @@ description: Changelog
 **Version 1.1.9**, _6 April 2023_
 
 * Add new methods
-  * _`createDocumentIfNotExists() 🆕`_
-  * _`getDocumentByCriteria() 🆕`_
-  * _`searchDocumentsByCriteria() 🆕`_
-  * _`searchDocuments() 🆕`_
-  * _`groupByDocuments() 🆕`_
-  * _`filterDocumentsByCriteria() 🆕`_
-  * _`filterDocuments() 🆕`_
-  * _`filterDocumentsByIds() 🆕`_
-  * _`existsDocument()`_
-  * _`findDocument() 🆕`_
-  * _`fetchAll() 🆕`_
+  * _`createDocumentIfNotExists()`_
+  * _`getDocumentByCriteria()`_
+  * _`searchDocumentsByCriteria()`_
+  * _`searchDocuments()`_
+  * _`groupByDocuments()`_
+  * _`filterDocumentsByCriteria()`_
+  * _`filterDocuments()`_
+  * _`filterDocumentsByIds()`_
+  * _`findDocument()`_
+  * _`fetchAll()`_
   * _`deleteAll()`_
   * _`callStoredProcedure() 🆕`_
