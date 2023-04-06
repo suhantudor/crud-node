@@ -48,4 +48,4 @@ description: Changelog
   * _`findDocument()`_
   * _`fetchAll()`_
   * _`deleteAll()`_
-  * _`callStoredProcedure() 🆕`_
+  * _`callStoredProcedure()`_
