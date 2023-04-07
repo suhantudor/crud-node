@@ -52,3 +52,7 @@ Add new methods
 - Add contributors
 - Improve prettier config
 - Improve eslint config
+
+**Version 1.2.1**, _7 Apr 2023_
+
+- Bug fixing
