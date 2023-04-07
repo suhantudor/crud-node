@@ -1,6 +1,6 @@
 {
   "name": "crud-node",
-  "version": "1.1.9",
+  "version": "1.2.0",
   "description": "Agnostic nodejs client that simplifies crud operations to a database",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -16,9 +16,9 @@
     "clean": "shx rm -rf dist",
     "reinstall": "rm -rf node_modules && yarn install",
     "build": "npm run clean && tsc -b",
-    "lint": "tsc --noEmit && eslint ./lib --quiet --fix",
-    "lint:fix": "yarn eslint ./lib --fix",
-    "lint:report": "yarn eslint ./lib -f json -o eslint-report.json",
+    "lint": "tsc --noEmit && eslint ./lib",
+    "lint:fix": "npx eslint --fix --ext .js,.ts .",
+    "lint:report": "npx eslint --ext .js,.ts . -f json -o eslint-report.json",
     "format": "prettier --write \"**/*.+(ts|js|json|md)\"",
     "prepublish": "npm run lint && npm run build",
     "publish:local": "yarn link",
@@ -29,31 +29,23 @@
   },
   "dependencies": {
     "@mysql/xdevapi": "8.0.28",
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "eslint-plugin-import": "^2.27.5",
     "knex": "2.1.0",
     "mysql2": "^2.3.3",
     "nanoid": "^3.1.31"
   },
   "devDependencies": {
-    "@babel/node": "^7.12.10",
-    "@babel/runtime": "^7.10.5",
     "@types/node": "^14.14.41",
-    "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "^4.22.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "7.28.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-babel": "^5.3.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.57.1",
+    "@typescript-eslint/parser": "^5.57.1",
+    "eslint": "8.37.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "husky": "^4.3.7",
-    "prettier": "^2.5.1",
-    "shx": "^0.3.3",
-    "typescript": "^4.5.5"
-  },
-  "prettier": {
-    "printWidth": 120,
-    "trailingComma": "all",
-    "singleQuote": true
+    "prettier": "^2.8.7",
+    "shx": "^0.3.4",
+    "typescript": "^5.0.3"
   },
   "husky": {
     "hooks": {
@@ -83,7 +75,18 @@
     "pg",
     "cassandra"
   ],
-  "author": "Suhan Tudor",
+  "contributors": [
+    {
+      "name": "Tudor",
+      "email": "suhantudor@gmail.com",
+      "url": "https://github.com/suhantudor"
+    },
+    {
+      "name": "Mariia ",
+      "email": "masha.rozhkova@gmail.com",
+      "url": "https://github.com/mariiasuhan"
+    }
+  ],
   "license": "UNLICENSED",
   "homepage": "https://github.com/suhantudor/crud-node#README",
   "bugs": {

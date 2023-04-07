@@ -1,6 +1,6 @@
+import { IDbErrorConfig } from './IDbErrorConfig';
 import { DbError } from './dbError';
 import { IErrorsMapper } from './errorsMapper';
-import { IDbErrorConfig } from './IDbErrorConfig';
 
 export const dbErrors = {
   forbidden: (): IDbErrorConfig => DbError.makeError('ERRDB001', 'Forbidden'),

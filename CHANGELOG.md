@@ -29,3 +29,26 @@
 **Version 1.1.8**, _26 Oct 2022_
 
 - Update roadmap future releases
+
+**Version 1.1.9**, _6 Apr 2023_
+
+Add new methods
+
+- createDocumentIfNotExists()
+- getDocumentByCriteria()
+- searchDocumentsByCriteria()
+- searchDocuments()
+- groupByDocuments()
+- filterDocumentsByCriteria()
+- filterDocuments()
+- filterDocumentsByIds()
+- findDocument()
+- fetchAll()
+- deleteAll()
+- callStoredProcedure()
+
+**Version 1.2.0**, _7 Apr 2023_
+
+- Add contributors
+- Improve prettier config
+- Improve eslint config

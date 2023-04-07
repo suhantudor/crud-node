@@ -5,7 +5,7 @@ import { DbError, dbErrors } from '../../errors';
 import { Group, ORDER, Sort } from '../../filter';
 import { FilterCriteria } from '../../filter/Filter';
 import { IOffsetPagination, IPaginatedSet, calculateLimit, resultSet } from '../../pagination';
-import { IDocumentSchema, IDocument, getDocumentFromCursor } from '../../types';
+import { IDocument, IDocumentSchema, getDocumentFromCursor } from '../../types';
 import { generateVarName } from '../../utils';
 
 /**
@@ -54,7 +54,7 @@ export class CRUDMySQLX<S extends string> {
 
     if (this.schema.unique) {
       await Promise.all(
-        this.schema.unique.map(async (uniqueIndex) => {
+        this.schema.unique.map(async uniqueIndex => {
           const criteria = uniqueIndex.reduce((props: Partial<IDocument<S>>, prop: S): Partial<IDocument<S>> => {
             // eslint-disable-next-line no-param-reassign
             props[prop] = newDoc[prop];
@@ -254,7 +254,7 @@ export class CRUDMySQLX<S extends string> {
    */
   private getWhereRawStatement(props: { [key: string]: unknown }, join: 'OR' | 'AND'): string {
     return Object.keys(props)
-      .map((name) => `${name} = :${name}`)
+      .map(name => `${name} = :${name}`)
       .join(` ${join} `);
   }
 
@@ -528,7 +528,7 @@ export class CRUDMySQLX<S extends string> {
     const collection = await this.db.getCollection(session, this.schema);
     const values = this.getBindings(props);
     const criteria = Object.keys(props)
-      .map((name) => `${name} = :${name}`)
+      .map(name => `${name} = :${name}`)
       .join(' AND ');
     const cursor = await collection.find(criteria).bind(values).execute();
     const doc = await cursor.fetchOne();
@@ -629,7 +629,7 @@ export class CRUDMySQLX<S extends string> {
     const params: Array<string> = [];
     if (variables) {
       await Promise.all(
-        variables.map(async (value) => {
+        variables.map(async value => {
           const name = `@${generateVarName(5)}`;
           params.push(name);
           await session.sql(`SET ${name} = ?;`).bind(value).execute();

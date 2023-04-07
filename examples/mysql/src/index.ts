@@ -27,7 +27,7 @@ const example = async () => {
 
   const officeController = new CRUDMySQL(db, officeSchema);
 
-  await db.usingSession(async (session) => {
+  await db.usingSession(async session => {
     await officeController.createDocument(session, {
       _id: 'virtual-offices-of-new-york-city',
       officeCode: 'Virtual Offices of New York City',
@@ -115,7 +115,7 @@ const example = async () => {
     console.log('Office with the biggest amount of free spaces:', JSON.stringify(office, null, 3));
   }, true);
 
-  await db.usingSession(async (session) => {
+  await db.usingSession(async session => {
     try {
       await officeController.existsDocument(session, { [OfficeProps.officeCode]: 'WORKVILLE' });
       console.log('WORKVILLE was not registered');
@@ -124,7 +124,7 @@ const example = async () => {
     }
   });
 
-  await db.usingSession(async (session) => {
+  await db.usingSession(async session => {
     const leslieBrett = await employeeController.createDocument(session, {
       email: 'leslie46@24mailin.com',
       firstName: 'Leslie',
@@ -177,13 +177,13 @@ const example = async () => {
     console.log('All employees:', JSON.stringify(allEmployees, null, 3));
   }, true);
 
-  await db.usingSession(async (session) => {
+  await db.usingSession(async session => {
     const totalEmployees = await employeeController.getTotal(session);
 
     const employees = await employeeController.getDocuments(session, OffsetPagination(1, totalEmployees));
 
     const deletedEmployeesRecords = await Promise.all(
-      employees.data.map(async (employee) => employeeController.deleteDocument(session, employee._id)),
+      employees.data.map(async employee => employeeController.deleteDocument(session, employee._id)),
     );
 
     console.log(
@@ -198,7 +198,7 @@ const example = async () => {
     const offices = await officeController.getDocuments(session, OffsetPagination(1, totalOffices));
 
     const deletedOfficesRecords = await Promise.all(
-      offices.data.map(async (office) => officeController.deleteDocument(session, office._id)),
+      offices.data.map(async office => officeController.deleteDocument(session, office._id)),
     );
 
     console.log('Deleted records of offices:', JSON.stringify(deletedOfficesRecords, null, 3), 'from:', totalOffices);
@@ -209,7 +209,7 @@ example()
   .then(() => {
     process.exit();
   })
-  .catch((error) => {
+  .catch(error => {
     console.log(error);
     process.exit(1);
   });

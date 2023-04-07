@@ -1,5 +1,4 @@
 import { generateVarName } from '../utils';
-
 import { FILTER_LEVEL, FILTER_OPERATIONS, FilterCondition, FilterGroup, GROUP_OPERATION } from './FilterBy';
 
 export type FilterCriteria = {
@@ -114,7 +113,7 @@ export class Filter {
         variables = { ...variables, ...itemCriteria.variables };
         return itemCriteria.statement;
       })
-      .filter((item) => !!item.trim())
+      .filter(item => !!item.trim())
       .join(` ${operation} `);
 
     return { statement: statement.trim().length > 1 ? `(${statement})` : '', variables };

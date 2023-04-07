@@ -1,4 +1,4 @@
-import { IDocumentSchema, IDocumentValidation, IDocument, getDocument } from 'crud-node';
+import { IDocument, IDocumentSchema, IDocumentValidation, getDocument } from 'crud-node';
 
 export enum OfficeProps {
   _id = '_id',

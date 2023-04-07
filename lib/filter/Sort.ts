@@ -42,7 +42,7 @@ export class Sorting {
   }
 
   private addConditions(order: ORDER, fields: Array<string>): Sorting {
-    fields.forEach((field) => {
+    fields.forEach(field => {
       if (this.fields.includes(field)) {
         throw new DbError(dbErrors.duplicatedSortingCondition());
       }

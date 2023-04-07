@@ -3,7 +3,7 @@ import { DbError, dbErrors } from '../../errors';
 import { Group, ORDER, Sort } from '../../filter';
 import { FilterCriteria } from '../../filter/Filter';
 import { IOffsetPagination, IPaginatedSet, calculateLimit, resultSet } from '../../pagination';
-import { IDocumentSchema, IDocument } from '../../types';
+import { IDocument, IDocumentSchema } from '../../types';
 import { generateVarName } from '../../utils';
 
 /**
@@ -276,7 +276,7 @@ export class CRUDMySQL<S extends string> {
    */
   private getWhereRawStatement(props: { [key: string]: unknown }, join: 'OR' | 'AND'): string {
     return Object.keys(props)
-      .map((name) => `${this.quote(name)} = :${name}`)
+      .map(name => `${this.quote(name)} = :${name}`)
       .join(` ${join} `);
   }
 
@@ -594,7 +594,7 @@ export class CRUDMySQL<S extends string> {
       }, {});
     }
     const paramsStmt = Object.keys(params)
-      .map((name) => `:${name}`)
+      .map(name => `:${name}`)
       .join(',');
     const result = await session.raw(`CALL ${procedureName}(${paramsStmt});`, params);
     return result;

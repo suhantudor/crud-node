@@ -2,14 +2,14 @@
 
 <img src="https://img.shields.io/badge/crud node-1.1.9-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="kafka version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
-**crud-node** is an agnostic database client implementation for node js. The package is written in JavaScript, and supports TypeScript bindings.
+**crud-node** is an agnostic nodejs client that simplifies crud operations to a database. The package is written in javaScript, and supports typeScript bindings.
 
 - [example](https://github.com/suhantudor/crud-node-realworld-example)
 - [documentation](https://suhantudor.gitbook.io/crud-node/)
 
 ## 🤡 Goal
 
-The motivation behind the `crud-node` is to provide a uniform interface to perform CRUD operation for many databases such as MySQL, MySQLX, Mongo, Cassandra, etc.
+The goal of `crud-node` is to offer a consistent way of executing CRUD (Create, Read, Update, and Delete) operations across numerous databases, including MySQL, MySQLX, Mongo, Cassandra, and more.
 
 ## ⚡️ Installation
 
@@ -107,7 +107,7 @@ The package use schema approach to help user understand what data will insert in
 
 ```typescript
 // employeeSchema.{ts|js}
-import { IDocumentSchema, IDocumentValidation, IDocument, getDocument, generateId } from 'crud-node';
+import { IDocument, IDocumentSchema, IDocumentValidation, generateId, getDocument } from 'crud-node';
 
 export enum EmployeeProps {
   _id = '_id',
@@ -174,7 +174,7 @@ A schema in a database can be created by using `.init()` function of a controlle
 > This method is available only for `MySQL X Protocol (Document Store)`
 
 ```typescript
-await db.usingSession(async (session) => {
+await db.usingSession(async session => {
   await employeeController.init(session);
 });
 ```
@@ -200,8 +200,9 @@ Use the power of JavaScript inheritance and extend CRUD Controller with custom l
 
 ```typescript
 // employeeController.{ts|js}
-import { MySQLX, CRUDMySQLX, IAppWithDatabase } from 'crud-node';
-import { employeeSchema, EmployeeProps } from './schemas/employee';
+import { CRUDMySQLX, IAppWithDatabase, MySQLX } from 'crud-node';
+
+import { EmployeeProps, employeeSchema } from './schemas/employee';
 
 export class EmployeeController extends CRUDMySQLX<EmployeeProps> {
   constructor(app: IAppWithDatabase<MySQLX>) {
@@ -222,7 +223,7 @@ import { employeeController } from './employeeController';
 // Executes operations in a single transaction
 const transacted = true;
 
-await db.usingSession(async (session) => {
+await db.usingSession(async session => {
   const payload = {
     email: 'leslie46@24mailin.com',
     firstName: 'Leslie',
@@ -236,7 +237,6 @@ await db.usingSession(async (session) => {
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { employeeController } from './employeeController';
 
 const payload = {
@@ -300,7 +300,8 @@ const data = await employeeController.getDocument(session, employeeId);
 
 ```typescript
 // officeRouter.{ts|js}
-import { SortBy, OffsetPagination } from 'crud-node';
+import { OffsetPagination, SortBy } from 'crud-node';
+
 import { officeController } from './officeController';
 import { OfficeProps } from './schemas/office';
 
@@ -314,7 +315,6 @@ const data = await officeController.getDocuments(session, pagination, sort);
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { employeeController } from './employeeController';
 import { EmployeeProps } from './schemas/employee';
 
@@ -327,7 +327,6 @@ const data = await employeeController.getDocumentByCriteria(session, { [Employee
 
 ```typescript
 // officeRouter.{ts|js}
-
 import { officeController } from './officeController';
 import { OfficeProps } from './schemas/office';
 
@@ -348,7 +347,6 @@ const data = await officeController.searchDocumentsByCriteria(
 
 ```typescript
 // officeRouter.{ts|js}
-
 import { officeController } from './officeController';
 
 const data = await officeController.searchDocuments(
@@ -365,8 +363,8 @@ const data = await officeController.searchDocuments(
 
 ```typescript
 // officeRouter.{ts|js}
-
 import { Condition, Filter, OffsetPagination, SortBy } from 'crud-node';
+
 import { officeController } from './officeController';
 import { OfficeProps } from './schemas/office';
 
@@ -388,8 +386,8 @@ const data = await officeController.filterDocumentsByCriteria(
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { GroupBy } from 'crud-node';
+
 import { employeeController } from './employeeController';
 import { EmployeeProps } from './schemas/employee';
 
@@ -406,8 +404,8 @@ const data = await employeeController.groupByDocuments<'fired' | EmployeeProps.c
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { OffsetPagination } from 'crud-node';
+
 import { employeeController } from './employeeController';
 
 const pagination = OffsetPagination(1, 10);
@@ -419,7 +417,6 @@ const data = await employeeController.filterDocuments(session, { fired: true }, 
 
 ```typescript
 // officeRouter.{ts|js}
-
 import { officeController } from './officeController';
 
 const officeIds = ['<id1>', '<id2>'];
@@ -431,7 +428,6 @@ const data = await officeController.filterDocumentsByIds(session, officeIds);
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { employeeController } from './employeeController';
 
 const data = await employeeController.fetchAll(session);
@@ -441,7 +437,6 @@ const data = await employeeController.fetchAll(session);
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { employeeController } from './employeeController';
 
 const employeeId = '<_id>';
@@ -486,7 +481,6 @@ const data = await employeeController.getTotal(session);
 
 ```typescript
 // employeeRouter.{ts|js}
-
 import { employeeController } from './employeeController';
 
 const data = await employeeController.callStoredProcedure(session, '<sp_name>', ['<parameter>']);

@@ -1,5 +1,5 @@
-import { DbError } from './dbError';
 import { IDbErrorConfig } from './IDbErrorConfig';
+import { DbError } from './dbError';
 
 export type ErrorsMapperKey = Error | DbError | IDbErrorConfig | string;
 
