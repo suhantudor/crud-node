@@ -49,3 +49,13 @@ description: Changelog
   * _fetchAll()_
   * _deleteAll()_
   * _callStoredProcedure()_
+
+**Version 1.2.0**, _7 April 2023_
+
+* Add contributors
+* Improve prettier config
+* Improve eslint config
+
+**Version 1.2.1**, _7 April 2023_
+
+* Bug fixing
