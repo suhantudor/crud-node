@@ -66,3 +66,7 @@ Add new methods
 **Version 1.2.3**, _8 Apr 2023_
 
 - Add homepage value to package.json
+
+**Version 1.2.4**, _8 Apr 2023_
+
+- Update Readme

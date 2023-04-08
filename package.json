@@ -1,6 +1,6 @@
 {
   "name": "crud-node",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Agnostic nodejs client that simplifies crud operations to a database",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

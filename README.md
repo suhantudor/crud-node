@@ -1,6 +1,6 @@
 # crud-node
 
-<img src="https://img.shields.io/badge/crud node-1.2.2-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
+<img src="https://img.shields.io/badge/crud node-1.2.4-15ACF6?style=for-the-badge&logo=none&logoColor=white" alt="version" />&nbsp;<img src="https://img.shields.io/badge/license-MIT-red?style=for-the-badge&logo=none" alt="license" />&nbsp;<img src="https://img.shields.io/badge/DEVELOPER-Suhan Tudor-purple?style=for-the-badge&logo=none" alt="developer" />
 
 **crud-node** is an agnostic nodejs client that simplifies crud operations to a database. The package is written in javaScript, and supports typeScript bindings.
 
@@ -405,7 +405,6 @@ const data = await employeeController.groupByDocuments<'fired' | EmployeeProps.c
 ```typescript
 // employeeRouter.{ts|js}
 import { OffsetPagination } from 'crud-node';
-
 import { employeeController } from './employeeController';
 
 const pagination = OffsetPagination(1, 10);
@@ -418,10 +417,12 @@ const data = await employeeController.filterDocuments(session, { fired: true }, 
 ```typescript
 // officeRouter.{ts|js}
 import { officeController } from './officeController';
+import { OfficeProps } from './schemas/office';
 
 const officeIds = ['<id1>', '<id2>'];
-
-const data = await officeController.filterDocumentsByIds(session, officeIds);
+const pagination = OffsetPagination(1, 10);
+const sort = SortBy().asc(OfficeProps.places).toCriteria();
+const data = await officeController.filterDocumentsByIds(session, officeIds, pagination, sort);
 ```
 
 #### Retrieve all records
@@ -485,6 +486,67 @@ import { employeeController } from './employeeController';
 
 const data = await employeeController.callStoredProcedure(session, '<sp_name>', ['<parameter>']);
 ```
+
+#### Filters
+
+**Filter Operations**
+
+- `eq` Equal
+- `in` In
+- `gr` Greater
+- `gre` Greater or Equal
+- `like` Like
+- `ls` Less
+- `lse` Less or Equal
+- `noteq` Not Equal
+- `empty` Empty
+
+**Reference**
+
+- _/crud-node/lib/filter/Filter.ts (ln. 9)_
+- _/crud-node/lib/filter/FilterBy.ts (ln. 63)_
+
+#### Sort
+
+**Sorting options**
+
+- `asc` Ascending
+- `desc` Descending
+
+**Reference**
+
+- _/crud-node/lib/filter/Sort.ts (ln. 31)_
+
+#### Pagination
+
+**Pagination methods**
+
+- `OffsetPagination` (_/crud-node/lib/pagination/OffsetPagination.ts (ln. 10)_)
+- `calculateLimit` (_/crud-node/lib/pagination/OffsetPagination.ts (ln. 25)_)
+- `calculateTotalPages` (_/crud-node/lib/pagination/OffsetPagination.ts (ln. 44)_)
+- `resultSet` (_/crud-node/lib/pagination/OffsetPagination.ts (ln. 54)_)
+- `limitOffset` (_/crud-node/lib/pagination/OffsetPagination.ts (ln. 71)_)
+
+#### Errors
+
+| Code     | Name                       | Description                           |
+| -------- | -------------------------- | ------------------------------------- |
+| ERRDB001 | forbidden                  | Forbidden                             |
+| ERRDB002 | notFound                   | Not found                             |
+| ERRDB003 | internalServerError        | Sorry, something went wrong           |
+| ERRDB004 | notImplemented             | Not impemented                        |
+| ERRDB005 | errorConnectionNotOpen     | Database connection is not opened     |
+| ERRDB006 | errorConnectionAlreadyOpen | Database connection is already opened |
+| ERRDB007 | errorDuplicatedDocument    | Duplicated document                   |
+| ERRDB008 | errorNothingWasDeleted     | Nothing was deleted                   |
+| ERRDB009 | errorNoIdProvided          | Cannot get document without [id]      |
+| ERRDB010 | errorNoCriteriaProvided    | Cannot get document without criteria  |
+| ERRDB011 | errorDocumentNotFound      | Document not found                    |
+| ERRDB012 | errorDbInstruction         | Fail to receive data                  |
+| ERRDB013 | unsupportedFilterOperation | Unsupported filter operation          |
+| ERRDB014 | duplicatedSortingCondition | Duplicated sorting condition          |
+| ERRDB015 | dbAnyError                 | Something went wrong!                 |
+|          |                            |                                       |
 
 ## 🔨 Issues
 
