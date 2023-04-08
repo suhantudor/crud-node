@@ -62,3 +62,7 @@ Add new methods
 - Correct typo createDocumentInNotExists -> createDocumentIfNotExists
 - Add Contributing rules
 - Fix end_of_line warning
+
+**Version 1.2.3**, _8 Apr 2023_
+
+- Add homepage value to package.json
