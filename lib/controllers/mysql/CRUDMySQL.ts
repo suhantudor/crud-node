@@ -76,7 +76,7 @@ export class CRUDMySQL<S extends string> {
    * @param {Object} session Current session with opened connection
    * @param {Partial<IDocument<S>>} values
    */
-  async createDocumentInNotExists(session: MySQLSession, values: Partial<IDocument<S>>): Promise<IDocument<S>> {
+  async createDocumentIfNotExists(session: MySQLSession, values: Partial<IDocument<S>>): Promise<IDocument<S>> {
     const newDoc = this.documentToDb(this.schema.getDocument(values));
 
     if (this.schema.unique) {

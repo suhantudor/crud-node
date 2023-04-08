@@ -56,3 +56,9 @@ Add new methods
 **Version 1.2.1**, _7 Apr 2023_
 
 - Bug fixing
+
+**Version 1.2.2**, _8 Apr 2023_
+
+- Correct typo createDocumentInNotExists -> createDocumentIfNotExists
+- Add Contributing rules
+- Fix end_of_line warning
